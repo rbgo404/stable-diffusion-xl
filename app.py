@@ -10,7 +10,7 @@ from io import BytesIO
 class InferlessPythonModel:
   def initialize(self):
     self.generator = DiffusionPipeline.from_pretrained(
-      "stability/stable-diffusion-xl-base-1.0",
+      "stabilityai/stable-diffusion-xl-base-1.0",
       torch_dtype=torch.float16,
       use_safetensors=True,
       variant="fp16",
