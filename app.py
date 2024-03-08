@@ -23,7 +23,7 @@ class InferlessPythonModel:
     pipeline_output_image = self.generator(prompt).images[0]
     buff = BytesIO()
     pipeline_output_image.save(buff, format="PNG")
-    img_str = base64.b64encode(buff.get value())
+    img_str = base64.b64encode(buff.getvalue())
     return {"generated_image_base64": img_str.decode('utf-8')}
 
   def finalize(self,args):
