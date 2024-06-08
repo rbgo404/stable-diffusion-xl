@@ -2,7 +2,7 @@
 Stable Diffusion XL Base+Refine refers to a model system developed by Stability AI for generating and modifying images based on text prompts. The system consists of two main components: the base model and the refinement model.
 ## Deploy Stable Diffusion-XL using Inferless:
 - Deployment of Stable Diffusion-XL model using [Diffusers](https://github.com/huggingface/diffusers).
-- By using the Diffusers, you can expect an average latency of 2.59 sec.
+- By using the Diffusers, you can expect an average latency of 2.506 sec.
 
 ---
 ## Prerequisites
