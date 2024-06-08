@@ -6,17 +6,18 @@ import torch
 class InferlessPythonModel:
   def initialize(self):
     scheduler_kwargs = {
-                        "beta_end": 0.012,
-                        "beta_schedule": "scaled_linear",
-                        "beta_start": 0.00085,
-                        "interpolation_type": "linear",
-                        "num_train_timesteps": 1000,
-                        "prediction_type": "epsilon",
-                        "steps_offset": 1,
-                        "timestep_spacing": "leading",
-                        "trained_betas": None,
-                        "use_karras_sigmas": False,
-                            }
+        "beta_end": 0.012,
+        "beta_schedule": "scaled_linear",
+        "beta_start": 0.00085,
+        "interpolation_type": "linear",
+        "num_train_timesteps": 1000,
+        "prediction_type": "epsilon",
+        "steps_offset": 1,
+        "timestep_spacing": "leading",
+        "trained_betas": None,
+        "use_karras_sigmas": False
+    }
+    
     self.base = DiffusionPipeline.from_pretrained(
         "stabilityai/stable-diffusion-xl-base-1.0",
         torch_dtype=torch.float16,
