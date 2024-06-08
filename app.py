@@ -35,6 +35,11 @@ class InferlessPythonModel:
         variant="fp16",
         scheduler=EulerDiscreteScheduler(**scheduler_kwargs),
     ).to("cuda")
+    
+    # This section attempts to compile the UNet models within the pipelines
+    # using `torch.compile` for potentially faster inference. 
+    # self.base.unet = torch.compile(self.base.unet, mode="reduce-overhead", fullgraph=True)
+    # self.refiner.unet = torch.compile(self.refiner.unet, mode="reduce-overhead", fullgraph=True)
 
   def infer(self, inputs):
     prompt = inputs["prompt"]
