@@ -32,7 +32,7 @@ Select the PyTorch as framework and choose **Repo(custom code)** as your model s
 
 After the create model step, while setting the configuration for the model make sure to select the appropriate runtime.
 
-Enter all the required details to Import your model. Refer [this link](https://docs.inferless.com/integrations/github-custom-code) for more information on model import.
+Enter all the required details to Import your model. Refer [this link](https://docs.inferless.com/integrations/git-custom-code/git--custom-code) for more information on model import.
 
 
 ---
