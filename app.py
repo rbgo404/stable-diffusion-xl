@@ -43,10 +43,11 @@ class InferlessPythonModel:
 
   def infer(self, inputs):
     prompt = inputs["prompt"]
+    negative_prompt = inputs["negative_prompt"]
     
     image = self.base(
         prompt=prompt,
-        negative_prompt="low quality, low resolution, greyscale, multiple fingers, nose, cropped, lowres, jpeg artifacts, deformed iris, deformed pupils, bad eyes, semi-realistic worst quality, bad lips, deformed mouth, deformed face, deformed fingers, deformed toes standing still, posing",
+        negative_prompt=negative_prompt,
         num_inference_steps=20,
         denoising_end=0.8,
         output_type="latent",
@@ -64,6 +65,6 @@ class InferlessPythonModel:
     img_str = base64.b64encode(buff.getvalue())
     return {"generated_image_base64": img_str.decode('utf-8')}
 
-  def finalize(self,args):
+  def finalize(self):
     self.base = None
     self.refiner = None

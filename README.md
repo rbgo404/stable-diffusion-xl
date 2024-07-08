@@ -34,43 +34,6 @@ After the create model step, while setting the configuration for the model make 
 
 Enter all the required details to Import your model. Refer [this link](https://docs.inferless.com/integrations/github-custom-code) for more information on model import.
 
-The following is a sample Input and Output JSON for this model which you can use while importing this model on Inferless.
-
-### Input
-```json
-{
-  "inputs": [
-    {
-      "data": [
-        "Penguins having dinner"
-      ],
-      "name": "prompt",
-      "shape": [
-        1
-      ],
-      "datatype": "BYTES"
-    }
-  ]
-}
-```
-
-### Output
-```json
-{
-  "outputs": [
-    {
-      "data": [
-        "Blank"
-      ],
-      "name": "generated_image_base64",
-      "shape": [
-        1
-      ],
-      "datatype": "BYTES"
-    }
-  ]
-}
-```
 
 ---
 ## Curl Command
@@ -90,6 +53,16 @@ curl --location '<your_inference_url>' \
                     1
                   ],
                   "datatype": "BYTES"
+                },
+                {
+                  "data": [
+                    "low quality, low resolution, greyscale, multiple fingers, nose, cropped, lowres, jpeg artifacts, deformed iris, deformed pupils, bad eyes, semi-realistic worst quality, bad lips, deformed mouth, deformed face, deformed fingers, deformed toes standing still, posing"
+                  ],
+                  "name": "negative_prompt",
+                  "shape": [
+                    1
+                  ],
+                  "datatype": "BYTES"
                 }
               ]
             }
@@ -102,13 +75,20 @@ Open the `app.py` file. This contains the main code for inference. It has three 
 
 **Initialize** -  This function is executed during the cold start and is used to initialize the model. If you have any custom configurations or settings that need to be applied during the initialization, make sure to add them in this function.
 
-**Infer** - This function is where the inference happens. The argument to this function `inputs`, is a dictionary containing all the input parameters. The keys are the same as the name given in inputs. Refer to [input](#input) for more.
+**Infer** - This function is where the inference happens. The argument to this function `inputs`, is a dictionary containing all the input parameters. The keys are the same as the name given in inputs. Refer to [input](https://docs.inferless.com/model-import/input-output-schema) for more.
 
 ```python
 def infer(self, inputs):
-    prompt = inputs["prompt"]
+  prompt = inputs["prompt"]
+  negative_prompt = inputs["negative_prompt"]
 ```
 
-**Finalize** - This function is used to perform any cleanup activity for example you can unload the model from the gpu by setting `self.pipe = None`.
+**Finalize** - This function is used to perform any cleanup activity for example you can unload the model from the gpu by setting
+
+```python
+def finalize(self):
+  self.base = None
+  self.refiner = None
+```
 
 For more information refer to the [Inferless docs](https://docs.inferless.com/).
